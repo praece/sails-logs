@@ -11,7 +11,7 @@ module.exports = function (sails) {
 
   return {
   	configure: function () {
-      if (sails.config.log.email && process.env.NODE_ENV === 'production') {
+      if (sails.config.log.email && (process.env.NODE_ENV === 'production' || sails.config.log.email.sendDev)) {
         var config = _.assign({level: 'error', json: true}, sails.config.log.email)
 
         sails.config.log.custom.add(Mail, config);
