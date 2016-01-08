@@ -46,13 +46,15 @@ customLogger.add(winston.transports.Console, {
   }
 });
 
-customLogger.add(winston.transports.File, {
-  level: 'error',
-  maxsize: 10*1024*1024,
-  maxFiles: 4,
-  tailable: true,
-  filename: 'log/dokku_' + _.snakeCase(process.env.APP_NAME) + '.log'
-});
+if (process.env.NODE_ENV === 'production') {
+  customLogger.add(winston.transports.File, {
+    level: 'error',
+    maxsize: 10*1024*1024,
+    maxFiles: 4,
+    tailable: true,
+    filename: 'log/dokku_' + _.snakeCase(process.env.APP_NAME) + '.log'
+  });
+}
 
 module.exports.log = {
 
