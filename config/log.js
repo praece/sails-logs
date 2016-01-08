@@ -51,7 +51,7 @@ customLogger.add(winston.transports.File, {
   maxsize: 10*1024*1024,
   maxFiles: 4,
   tailable: true,
-  filename: 'log/dokku_' + _.snakeCase(process.env.APP_NAME)'.log'
+  filename: 'log/dokku_' + _.snakeCase(process.env.APP_NAME) + '.log'
 });
 
 module.exports.log = {
