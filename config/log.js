@@ -25,6 +25,7 @@ var customLogger = new winston.Logger({
 customLogger.add(winston.transports.Console, {
   level: 'debug',
   colorize: true,
+  handleExceptions: true,
   formatter: function (options) {
     var output = '';
     output += config.colorize(options.level, options.level + ': ');
@@ -49,6 +50,7 @@ customLogger.add(winston.transports.Console, {
 if (process.env.NODE_ENV === 'production') {
   customLogger.add(winston.transports.File, {
     level: 'error',
+    handleExceptions: true,
     maxsize: 10*1024*1024,
     maxFiles: 4,
     tailable: true,
