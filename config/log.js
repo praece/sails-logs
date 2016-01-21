@@ -15,6 +15,7 @@ var config  = require('winston/lib/winston/config');
 var _       = require('lodash');
 
 var customLogger = new winston.Logger({
+  exitOnError: false,
   rewriters: [function (level, msg, meta) {
     if (meta.error) meta.stack = meta.error.stack.split('\n');
 
