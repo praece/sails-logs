@@ -15,8 +15,12 @@ var config  = require('winston/lib/winston/config');
 var _       = require('lodash');
 
 var customLogger = new winston.Logger({
-  exitOnError: false,
+  // exitOnError: false,
   rewriters: [function (level, msg, meta) {
+    // If someone passes an error directly into meta nest it on the correct key.
+    if (_.isError(meta)) meta = {error: meta};
+
+    // Parse out the stack since arrays are not enumerable.
     if (meta.error) meta.stack = meta.error.stack.split('\n');
 
     return meta;
@@ -26,7 +30,7 @@ var customLogger = new winston.Logger({
 customLogger.add(winston.transports.Console, {
   level: 'debug',
   colorize: true,
-  handleExceptions: true,
+  // handleExceptions: true,
   formatter: function (options) {
     var output = '';
     output += config.colorize(options.level, options.level + ': ');
