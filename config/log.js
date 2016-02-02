@@ -28,7 +28,7 @@ var customLogger = new winston.Logger({
 });
 
 customLogger.add(winston.transports.Console, {
-  level: 'debug',
+  level: 'silly',
   colorize: true,
   // handleExceptions: true,
   formatter: function (options) {
