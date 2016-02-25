@@ -18,7 +18,7 @@ var customLogger = new winston.Logger({
   // exitOnError: false,
   rewriters: [function (level, msg, meta) {
     // If someone passes an error directly into meta nest it on the correct key.
-    if (_.isError(meta)) meta = {error: meta};
+    if (meta instanceof Error) meta = {error: meta};
 
     // Parse out the stack since arrays are not enumerable.
     if (meta.error) meta.stack = meta.error.stack.split('\n');
