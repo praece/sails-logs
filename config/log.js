@@ -21,7 +21,7 @@ var customLogger = new winston.Logger({
     if (meta instanceof Error) meta = {error: meta};
 
     // Parse out the stack since arrays are not enumerable.
-    if (meta.error) meta.stack = meta.error.stack.split('\n');
+    if (meta.error && meta.error.stack) meta.stack = meta.error.stack.split('\n');
 
     return meta;
   }]
