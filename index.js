@@ -12,22 +12,22 @@ module.exports = function (sails) {
 
   return {
     configure: function () {
-      var config = sails.config.log;
+      var logConfig = sails.config.log;
 
-      if (config.email && (process.env.NODE_ENV === 'production' || config.email.sendDev)) {
-        var config = _.assign({level: 'error', json: true, handleExceptions: true}, config.email)
+      if (logConfig.email && (process.env.NODE_ENV === 'production' || logConfig.email.sendDev)) {
+        var config = _.assign({level: 'error', json: true, handleExceptions: true}, logConfig.email)
 
-        config.custom.add(Mail, config);
+        logConfig.custom.add(Mail, config);
       }
 
-      if (config.file) {
-        config.custom.add(winston.transports.File, {
+      if (logConfig.file) {
+        logConfig.custom.add(winston.transports.File, {
           level: 'error',
           handleExceptions: true,
           maxsize: 10*1024*1024,
           maxFiles: 4,
           tailable: true,
-          filename: config.file
+          filename: logConfig.file
         });
       }
     }
