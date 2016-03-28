@@ -1,7 +1,7 @@
 {
   "name": "praece-sails-logs",
-  "version": "1.0.0",
-  "description": "Logging for sails.",
+  "version": "1.0.2",
+  "description": "Logging for sails!",
   "main": "index.js",
   "author": "Praece Consulting",
   "repository": {
