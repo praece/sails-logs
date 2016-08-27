@@ -1,6 +1,6 @@
 var Mail = require('./lib/email').Mail;
+var Loggly = require('./lib/loggly').Loggly;
 var winston = require('winston');
-require('winston-loggly-bulk');
 var _    = require('lodash');
 
 module.exports = function (sails) {
@@ -22,10 +22,10 @@ module.exports = function (sails) {
       }
 
       if (logConfig.loggly) {
-        logConfig.custom.add(winston.transports.Loggly, {
+        logConfig.custom.add(Loggly, {
           level: 'info',
           token: logConfig.loggly.token,
-          subdomain: "praece",
+          subdomain: 'praece',
           tags: logConfig.loggly.tags,
           json: true
         });
