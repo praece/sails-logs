@@ -23,7 +23,7 @@ module.exports = function (sails) {
 
       if (logConfig.loggly) {
         logConfig.custom.add(Loggly, {
-          level: 'info',
+          level: 'debug',
           token: logConfig.loggly.token,
           subdomain: 'praece',
           tags: logConfig.loggly.tags,
