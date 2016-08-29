@@ -11,7 +11,6 @@
  */
 
 var winston = require('winston');
-var config  = require('winston/lib/winston/config');
 var _       = require('lodash');
 
 var customLogger = new winston.Logger({
@@ -25,31 +24,6 @@ var customLogger = new winston.Logger({
 
     return meta;
   }]
-});
-
-customLogger.add(winston.transports.Console, {
-  level: 'warn',
-  colorize: true,
-  // handleExceptions: true,
-  formatter: function (options) {
-    var output = '';
-    output += config.colorize(options.level, options.level + ': ');
-
-    if (options.meta.error) {
-      output += options.meta.error.stack;
-      delete options.meta.error;
-      delete options.meta.stack;
-    } else {
-      output += options.message;
-    }
-
-    if (!_.isEmpty(options.meta)) {
-      output += '\n';
-      output += JSON.stringify(options.meta, null, 2);
-    }
-
-    return output;
-  }
 });
 
 module.exports.log = {
