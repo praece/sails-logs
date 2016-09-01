@@ -70,11 +70,23 @@ module.exports = function (sails) {
       }
 
       if (logConfig.logRequests) {
-        sails.config.http.middleware.order.unshift('logRequest');
+        morgan.token('user', function getUser(req, res) {
+          var user = req.user;
 
-        sails.config.http.middleware.logRequest = morgan('combined', { stream: { write: function(message) {
-          sails.log.info(message, { tags: ['request-log'] });
-        }}});
+          if (!user) return;
+
+          return `${user.firstName} ${user.lastName} [${req.user.id}]`;
+        });
+
+        sails.config.http.middleware.order.unshift('logRequest');
+        const template = ':user - :method :url :status - :response-time ms';
+        const stream = {
+          write(message) {
+            sails.log.info(message, { tags: ['request-log'] });
+          }
+        };
+
+        sails.config.http.middleware.logRequest = morgan(template, { stream });
       }
     }
   };

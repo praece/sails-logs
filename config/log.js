@@ -41,6 +41,7 @@ module.exports.log = {
   ***************************************************************************/
 
   custom: customLogger,
+  noShip: true,
   level: 'silly',
   inspect: false
 
