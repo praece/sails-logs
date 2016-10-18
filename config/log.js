@@ -23,7 +23,12 @@ var customLogger = new winston.Logger({
     if (meta.error && meta.error.stack) meta.stack = meta.error.stack.split('\n');
 
     return meta;
-  }]
+  }],
+  exceptionHandlers: [
+    new winston.transports.Console({ formatter: function(options) {
+      return _.join(options.meta.stack, '\n');
+    }})
+  ]
 });
 
 module.exports.log = {
