@@ -24,7 +24,7 @@ module.exports = function (sails) {
           output += config.colorize(options.level, options.level + ': ');
 
           if (options.meta.error) {
-            output += options.meta.error.stack;
+            output += _.join(options.meta.stack, '\n');
             delete options.meta.error;
             delete options.meta.stack;
           } else {
