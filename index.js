@@ -79,7 +79,7 @@ module.exports = function (sails) {
         });
 
         sails.config.http.middleware.order.unshift('logRequest');
-        const template = ':user - :method :url :status - :response-time ms';
+        const template = ':user - :method :url :status - :response-time ms - :user-agent';
         const stream = {
           write(message) {
             sails.log.info(message, { tags: ['request-log'] });
