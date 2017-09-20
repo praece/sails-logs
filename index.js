@@ -78,8 +78,12 @@ module.exports = function (sails) {
           return `${user.firstName} ${user.lastName} [${req.user.id}]`;
         });
 
+        morgan.token('body', function getBody(req, res) {
+          return JSON.stringify(req.params.all());
+        });
+
         sails.config.http.middleware.order.unshift('logRequest');
-        const template = ':user - :method :url :status - :response-time ms - :user-agent';
+        const template = ':user - :method :url :status - :response-time ms - :user-agent - :body';
         const stream = {
           write(message) {
             sails.log.info(message, { tags: ['request-log'] });
