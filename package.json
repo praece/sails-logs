@@ -9,7 +9,7 @@
     "url": "https://github.com/praece/sails-logs"
   },
   "devDependencies": {
-    "sails": "~0.11.0"
+    "sails": "~1.2.3"
   },
   "dependencies": {
     "lodash": "^4.3.0",
