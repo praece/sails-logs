@@ -79,7 +79,7 @@ module.exports = function (sails) {
         });
 
         morgan.token('body', function getBody(req, res) {
-          return JSON.stringify(req.params.all());
+          return JSON.stringify(req.params ? req.params.all() : '');
         });
 
         sails.config.http.middleware.order.unshift('logRequest');
