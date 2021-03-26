@@ -16,6 +16,8 @@ var _       = require('lodash');
 var customLogger = new winston.Logger({
   // exitOnError: false,
   rewriters: [function (level, msg, meta) {
+    meta = meta || {};
+    
     // If someone passes an error directly into meta nest it on the correct key.
     if (meta instanceof Error) meta = {error: meta};
 
